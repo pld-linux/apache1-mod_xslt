@@ -1,22 +1,25 @@
+%define		mod_name	xslt
 Summary:	Module to serve XML based content
 Summary(pl):	Modu³ do udostêpniania dokumentów XML
-%define		arname	modxslt
-Name:		apache-mod_xslt
-Version:	1.0
+Name:		apache-mod_%{mod_name}
+Version:	1.1
 Release:	1
 License:	GPL
 URL:		http://modxslt.userworld.com/
-Source0:	http://modxslt.userworld.com/%{arname}.tar.gz
+Source0:	http://prdownloads.sourceforge.net/mod%{mod_name}/mod_%{mod_name}-%{version}.tar.gz
+Source1:	mod_%{mod_name}.conf
+Patch0:		mod_%{mod_name}-includes.patch
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Requires:	expat
 Requires:	sablotron
 BuildRequires:	apache-devel
 BuildRequires:	sablotron-devel
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{_sbindir}/apxs -q LIBEXECDIR)
+%define		_sysconfdir	/etc/httpd
 
 %description
 mod_xslt is a simple Apache module to serve XML based content. Data is
@@ -31,7 +34,8 @@ tutorial_html.xsl. The content-type returned to the browser is
 text/html. The translation occurs transparently to the user.
 
 %prep
-%setup -q -n mod_xslt
+%setup -q -n mod%{mod_name}
+%patch0 -p1
 
 %build
 CFLAGS="%{rpmcflags}"; export CFLAGS
@@ -39,8 +43,28 @@ CFLAGS="%{rpmcflags}"; export CFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_pkglibdir}
-cp -f *.so $RPM_BUILD_ROOT%{_pkglibdir}
+
+install	-d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}}
+install mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mod_xslt.conf
+
+%post
+if [ -f /etc/httpd/httpd.conf ] && ! grep -q "^Include.*mod_%{mod_name}.conf" /etc/httpd/httpd.conf; then
+	echo "Include /etc/httpd/mod_%{mod_name}.conf" >> /etc/httpd/httpd.conf
+fi
+if [ -f /var/lock/subsys/httpd ]; then
+	/etc/rc.d/init.d/httpd restart 1>&2
+fi
+
+%preun
+if [ "$1" = "0" ]; then
+	grep -v -q "^Include.*mod_%{mod_name}.conf" /etc/httpd/httpd.conf > \
+		/etc/httpd/httpd.conf.tmp
+        mv -f /etc/httpd/httpd.conf.tmp /etc/httpd/httpd.conf
+	if [ -f /var/lock/subsys/httpd ]; then
+		/etc/rc.d/init.d/httpd restart 1>&2
+	fi
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -48,3 +72,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_pkglibdir}/*
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/mod_%{mod_name}.conf
