@@ -8,7 +8,7 @@ Summary:	Module to serve XML based content
 Summary(pl):	Modu³ do udostêpniania dokumentów XML
 Name:		apache1-mod_%{mod_name}
 Version:	1.1
-Release:	1.1
+Release:	1.2
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/modxslt/mod_%{mod_name}-%{version}.tar.gz
@@ -22,7 +22,6 @@ URL:		http://modxslt.userworld.com/
 BuildRequires:	%{apxs}
 BuildRequires:	apache1-devel >= 1.3.33-2
 BuildRequires:	sablotron-devel
-Requires(post,preun):	%{apxs}
 Requires:	apache1 >= 1.3.33-2
 Requires:	expat
 Requires:	sablotron
