@@ -6,19 +6,20 @@ Name:		apache-mod_%{mod_name}
 Version:	1.1
 Release:	4
 License:	GPL
-URL:		http://modxslt.userworld.com/
-Source0:	http://prdownloads.sourceforge.net/mod%{mod_name}/mod_%{mod_name}-%{version}.tar.gz
+Group:		Networking/Daemons
+Source0:	http://dl.sourceforge.net/modxslt/mod_%{mod_name}-%{version}.tar.gz
 Source1:	mod_%{mod_name}.conf
 Patch0:		mod_%{mod_name}-includes.patch
 Patch1:		mod_%{mod_name}-regex.patch
 Patch2:		mod_%{mod_name}-make.patch
 Patch3:		mod_%{mod_name}-module.patch
-Group:		Networking/Daemons
-Requires:	expat
-Requires:	sablotron
+URL:		http://modxslt.userworld.com/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel
 BuildRequires:	sablotron-devel
+Requires(post,preun):	%{apxs}
+Requires:	expat
+Requires:	sablotron
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
