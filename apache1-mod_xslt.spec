@@ -46,7 +46,7 @@ Modu³ zamienia ten URL na pliki ¼ród³owe XML i XSL. W tym przyk³adzie
 plikiem XML bêdzie sourcefile.xml. Modu³ otworzy plik sourcefile.xml i
 okre¶li DOCTYPE, na podstawie którego otworzy odpowiedni plik XSL.
 Je¿eli DOCTYPE jest "tutorial", plikiem XSL bêdzie tutorial_html.xsl.
-Nastêpnie modu³ dokona przetwarzania pliku XML za pomoc± arkusza XSLT 
+Nastêpnie modu³ dokona przetwarzania pliku XML za pomoc± arkusza XSLT
 i zwróci przegl±darce powsta³y w ten sposób text/html. Ca³y proces
 odbywa siê w sposób niewidoczny dla u¿ytkownika.
 
