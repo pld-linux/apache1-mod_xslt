@@ -33,7 +33,7 @@ is text/html. The translation occurs transparently to the user.
 %setup -q -n mod_xslt
 
 %build
-CFLAGS="$RPM_OPT_FLAGS %{?debug:-g -O}"; export CFLAGS
+CFLAGS="$RPM_OPT_FLAGS %{?debug:-g -O0}"; export CFLAGS
 %{__make} APXS=%{_sbindir}/apxs
 
 %install
