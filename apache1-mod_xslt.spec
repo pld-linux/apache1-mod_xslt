@@ -3,7 +3,7 @@ Summary:	Module to serve XML based content
 Summary(pl):	Modu³ do udostêpniania dokumentów XML
 Name:		apache-mod_%{mod_name}
 Version:	1.1
-Release:	1
+Release:	2
 License:	GPL
 URL:		http://modxslt.userworld.com/
 Source0:	http://prdownloads.sourceforge.net/mod%{mod_name}/mod_%{mod_name}-%{version}.tar.gz
@@ -43,8 +43,8 @@ CFLAGS="%{rpmcflags}"; export CFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}}
 
-install	-d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}}
 install mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mod_xslt.conf
 
