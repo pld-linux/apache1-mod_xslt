@@ -1,0 +1,11 @@
+--- modxslt/Makefile.orig	Fri Sep 13 17:09:40 2002
++++ modxslt/Makefile	Fri Sep 13 17:09:21 2002
+@@ -6,7 +6,7 @@
+ 
+ #   compile the shared object file
+ mod_xslt.so: mod_xslt.c
+-	$(APXS) -c mod_xslt.c -o mod_xslt.so
++	$(APXS) -c mod_xslt.c -o mod_xslt.so -lsablot
+ 
+ #   cleanup
+ clean:
