@@ -72,7 +72,7 @@ fi
 
 %preun
 if [ "$1" = "0" ]; then
-	grep -v -q "^Include.*mod_%{mod_name}.conf" /etc/httpd/httpd.conf > \
+	grep -v "^Include.*mod_%{mod_name}.conf" /etc/httpd/httpd.conf > \
 		/etc/httpd/httpd.conf.tmp
         mv -f /etc/httpd/httpd.conf.tmp /etc/httpd/httpd.conf
 	if [ -f /var/lock/subsys/httpd ]; then
