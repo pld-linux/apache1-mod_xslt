@@ -8,6 +8,7 @@ Release:	4
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/modxslt/mod_%{mod_name}-%{version}.tar.gz
+# Source0-md5:	ce458a48f56cc857c808b71ec27f592d
 Source1:	mod_%{mod_name}.conf
 Patch0:		mod_%{mod_name}-includes.patch
 Patch1:		mod_%{mod_name}-regex.patch
