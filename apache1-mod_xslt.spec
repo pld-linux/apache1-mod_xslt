@@ -4,7 +4,7 @@ Summary:	Module to serve XML based content
 Summary(pl):	Modu³ do udostêpniania dokumentów XML
 Name:		apache-mod_%{mod_name}
 Version:	1.1
-Release:	2
+Release:	3
 License:	GPL
 URL:		http://modxslt.userworld.com/
 Source0:	http://prdownloads.sourceforge.net/mod%{mod_name}/mod_%{mod_name}-%{version}.tar.gz
