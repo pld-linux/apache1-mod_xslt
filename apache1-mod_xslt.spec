@@ -1,4 +1,5 @@
 %define		mod_name	xslt
+%define 	apxs		/usr/sbin/apxs
 Summary:	Module to serve XML based content
 Summary(pl):	Modu≥ do udostÍpniania dokumentÛw XML
 Name:		apache-mod_%{mod_name}
@@ -10,15 +11,28 @@ Source0:	http://prdownloads.sourceforge.net/mod%{mod_name}/mod_%{mod_name}-%{ver
 Source1:	mod_%{mod_name}.conf
 Patch0:		mod_%{mod_name}-includes.patch
 Group:		Networking/Daemons
+Group(cs):	SÌªovÈ/DÈmoni
+Group(da):	NetvÊrks/DÊmoner
 Group(de):	Netzwerkwesen/Server
+Group(es):	Red/Servidores
+Group(fr):	RÈseau/Serveurs
+Group(is):	Net/P˙kar
+Group(it):	Rete/Demoni
+Group(no):	Nettverks/Daemoner
 Group(pl):	Sieciowe/Serwery
+Group(pt):	Rede/Servidores
+Group(ru):	Û≈‘ÿ/‰≈ÕœŒŸ
+Group(sl):	Omreæni/Streæniki
+Group(sv):	N‰tverk/Demoner
+Group(uk):	Ì≈“≈÷¡/‰≈ÕœŒ…
 Requires:	expat
 Requires:	sablotron
+BuildRequires:	%{apxs}
 BuildRequires:	apache-devel
 BuildRequires:	sablotron-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_pkglibdir	%(%{_sbindir}/apxs -q LIBEXECDIR)
+%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
 %define		_sysconfdir	/etc/httpd
 
 %description
@@ -50,7 +64,7 @@ T≥umaczenie jest przezroczyste dla uøytkownika.
 
 %build
 CFLAGS="%{rpmcflags} -DEAPI"; export CFLAGS
-%{__make} APXS=%{_sbindir}/apxs
+%{__make} APXS=%{apxs}
 
 %install
 rm -rf $RPM_BUILD_ROOT
