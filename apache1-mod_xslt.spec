@@ -49,7 +49,7 @@ T³umaczenie jest przezroczyste dla u¿ytkownika.
 %patch0 -p1
 
 %build
-CFLAGS="%{rpmcflags}"; export CFLAGS
+CFLAGS="%{rpmcflags} -DEAPI"; export CFLAGS
 %{__make} APXS=%{_sbindir}/apxs
 
 %install
