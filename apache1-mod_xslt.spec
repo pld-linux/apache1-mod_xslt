@@ -10,6 +10,7 @@ URL:		http://modxslt.userworld.com/
 Source0:	http://prdownloads.sourceforge.net/mod%{mod_name}/mod_%{mod_name}-%{version}.tar.gz
 Source1:	mod_%{mod_name}.conf
 Patch0:		mod_%{mod_name}-includes.patch
+Patch1:		mod_%{mod_name}-regex.patch
 Group:		Networking/Daemons
 Requires:	expat
 Requires:	sablotron
@@ -47,6 +48,7 @@ T³umaczenie jest przezroczyste dla u¿ytkownika.
 %prep
 %setup -q -n mod%{mod_name}
 %patch0 -p1
+%patch1 -p1
 
 %build
 CFLAGS="%{rpmcflags} -DEAPI"; export CFLAGS
