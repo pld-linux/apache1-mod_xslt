@@ -9,11 +9,11 @@ License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/modxslt/mod_%{mod_name}-%{version}.tar.gz
 # Source0-md5:	ce458a48f56cc857c808b71ec27f592d
-Source1:	mod_%{mod_name}.conf
-Patch0:		mod_%{mod_name}-includes.patch
-Patch1:		mod_%{mod_name}-regex.patch
-Patch2:		mod_%{mod_name}-make.patch
-Patch3:		mod_%{mod_name}-module.patch
+Source1:	%{name}.conf
+Patch0:		%{name}-includes.patch
+Patch1:		%{name}-regex.patch
+Patch2:		%{name}-make.patch
+Patch3:		%{name}-module.patch
 URL:		http://modxslt.userworld.com/
 BuildRequires:	%{apxs}
 BuildRequires:	apache1-devel
@@ -60,8 +60,9 @@ odbywa siê w sposób niewidoczny dla u¿ytkownika.
 %patch3 -p1
 
 %build
-CFLAGS="%{rpmcflags} -DEAPI"; export CFLAGS
-%{__make} APXS=%{apxs}
+%{__make} \
+	APXS=%{apxs} \
+	CFLAGS="%{rpmcflags} -DEAPI"
 
 %install
 rm -rf $RPM_BUILD_ROOT
