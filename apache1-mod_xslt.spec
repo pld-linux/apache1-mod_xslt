@@ -4,13 +4,15 @@ Summary:	Module to serve XML based content
 Summary(pl):	Modu³ do udostêpniania dokumentów XML
 Name:		apache-mod_%{mod_name}
 Version:	1.1
-Release:	3
+Release:	4
 License:	GPL
 URL:		http://modxslt.userworld.com/
 Source0:	http://prdownloads.sourceforge.net/mod%{mod_name}/mod_%{mod_name}-%{version}.tar.gz
 Source1:	mod_%{mod_name}.conf
 Patch0:		mod_%{mod_name}-includes.patch
 Patch1:		mod_%{mod_name}-regex.patch
+Patch2:		mod_%{mod_name}-make.patch
+Patch3:		mod_%{mod_name}-module.patch
 Group:		Networking/Daemons
 Requires:	expat
 Requires:	sablotron
@@ -50,6 +52,8 @@ odbywa siê w sposób niewidoczny dla u¿ytkownika.
 %setup -q -n mod%{mod_name}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 CFLAGS="%{rpmcflags} -DEAPI"; export CFLAGS
@@ -66,18 +70,14 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mod_xslt.conf
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /etc/httpd/httpd.conf ] && ! grep -q "^Include.*mod_%{mod_name}.conf" /etc/httpd/httpd.conf; then
-	echo "Include /etc/httpd/mod_%{mod_name}.conf" >> /etc/httpd/httpd.conf
-fi
+%{apxs} -e -a -n %{mod_name} %{_pkglibdir}/mod_%{mod_name}.so 1>&2
 if [ -f /var/lock/subsys/httpd ]; then
 	/etc/rc.d/init.d/httpd restart 1>&2
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-	grep -v "^Include.*mod_%{mod_name}.conf" /etc/httpd/httpd.conf > \
-		/etc/httpd/httpd.conf.tmp
-        mv -f /etc/httpd/httpd.conf.tmp /etc/httpd/httpd.conf
+	%{apxs} -e -A -n %{mod_name} %{_pkglibdir}/mod_%{mod_name}.so 1>&2
 	if [ -f /var/lock/subsys/httpd ]; then
 		/etc/rc.d/init.d/httpd restart 1>&2
 	fi
