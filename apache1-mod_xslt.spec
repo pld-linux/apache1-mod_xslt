@@ -25,7 +25,7 @@ BuildRequires:	sablotron-devel
 Requires:	apache1 >= 1.3.33-2
 Requires:	expat
 Requires:	sablotron
-Obsoletes:	apache-mod_%{mod_name} <= %{version}
+Obsoletes:	apache-mod_%{mod_name} <= 1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
