@@ -5,7 +5,7 @@
 %define		mod_name	xslt
 %define 	apxs		/usr/sbin/apxs1
 Summary:	Module to serve XML based content
-Summary(pl.UTF-8):   Moduł do udostępniania dokumentów XML
+Summary(pl.UTF-8):	Moduł do udostępniania dokumentów XML
 Name:		apache1-mod_%{mod_name}
 Version:	1.1
 Release:	1.2
