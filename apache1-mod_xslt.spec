@@ -19,8 +19,7 @@ Patch1:		%{name}-regex.patch
 Patch2:		%{name}-make.patch
 Patch3:		%{name}-module.patch
 URL:		http://modxslt.userworld.com/
-BuildRequires:	apache1-apxs
-BuildRequires:	apache1-devel >= 1.3.33-2
+BuildRequires:	apache1-devel >= 1.3.39
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	sablotron-devel
 Requires:	apache1 >= 1.3.33-2
