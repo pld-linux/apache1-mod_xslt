@@ -8,7 +8,7 @@ Summary:	Module to serve XML based content
 Summary(pl.UTF-8):	Moduł do udostępniania dokumentów XML
 Name:		apache1-mod_%{mod_name}
 Version:	1.1
-Release:	1.2
+Release:	1.3
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/modxslt/mod_%{mod_name}-%{version}.tar.gz
@@ -22,7 +22,7 @@ URL:		http://modxslt.userworld.com/
 BuildRequires:	apache1-devel >= 1.3.39
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	sablotron-devel
-Requires:	apache1 >= 1.3.33-2
+Requires:	apache1(EAPI)
 Requires:	expat
 Requires:	sablotron
 Obsoletes:	apache-mod_xslt <= 1.1
